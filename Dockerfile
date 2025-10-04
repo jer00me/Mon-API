@@ -4,4 +4,5 @@ COPY ./src/openAPI.yaml .
 RUN redocly build-docs --output "index.html" openAPI.yaml
 
 FROM nginx:alpine
+EXPOSE 80
 COPY --from=build /usr/src/app /usr/share/nginx/html

@@ -1,0 +1,8 @@
+services:
+  build-docs:
+    build: ./Dockerfile
+    volumes: 
+      - index.html: /usr/share/nginx/html
+    ports:
+      - 82:82
+    command: 
