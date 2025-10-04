@@ -23,6 +23,8 @@ paths:
 
     post:
       summary: Add a bakery to the list
+      parameters:
+        - "$ref": "#/components/parameters/bakery-id"
       security:
         - bearerAuth: []
       responses:
@@ -77,14 +79,14 @@ components:
     BakeryCreation:
       type: object
       properties:
-        name:
+        owner:
           type: string
           example: Nicolas
-        age:
+        creation-year:
           type: integer
-          min: 16
-          max: 130
-          example: 20
+          min: 1800
+          max: 2025
+          example: 1999
         info:
           type: object
           properties:
@@ -124,6 +126,15 @@ components:
       in: query
       schema:
         type: string
+  responses:
+    not_found:
+      description: Resource not found
+    forbidden:
+      description: Forbidden due to lack of permission
+    internal_server_error:
+        description: Internal Server Error
+    no_content:
+        description: No Content
   securitySchemes:
     bearerAuth:
       type: http
