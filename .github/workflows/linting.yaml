@@ -14,9 +14,8 @@ jobs:
       - name: Setup Environment
         uses: actions/setup-node@v4
 
-      - name: Load & Cache Dependencies
-        uses: ./.github/actions/cached-deps
+      - name: Install redocly/cli
+        run: npm i -g @redocly/cli@latest
 
       - name: Run Linting Rules
-        run: exec lint
-
+        run: redocly lint ./src/openAPI.yaml
