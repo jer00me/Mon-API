@@ -1,8 +1,17 @@
 services:
   build-docs:
-    build: ./Dockerfile
-    volumes: 
-      - index.html: /usr/share/nginx/html
+    build: .
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/web
+          target: /app/apps/web
+          ignore:
+            - node_modules
+        - action: rebuild
+          path: package.json
+        - action: sync+restart
+          path: ./apps/web/next.config.js
+          target: /app/apps/web/next.config.js
     ports:
-      - 82:82
-    command: 
+      - 82:80
